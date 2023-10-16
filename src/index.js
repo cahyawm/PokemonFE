@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(pokemon.url)
           .then((response) => response.json())
           .then((pokemonData) => {
-            // Lakukan permintaan API tambahan untuk deskripsi Pokemon
             fetch(
               `https://pokeapi.co/api/v2/pokemon-species/${pokemonData.id}/`
             )
@@ -21,11 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   "relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700";
 
                 card.innerHTML = `
-                  <div class="absolute top-3 right-3 text-[#D5D6C6] text-3xl font-bold px-2 py-1">
-                    #${pokemonData.id}
-                  </div>
-                  <img class="rounded-t-lg" src="${
-                    pokemonData.sprites.other.home.front_default
+                  <div class="absolute top-3 right-3 text-[#D5D6C6] text-3xl font-bold px-2 py-1">#${pokemonData.id}</div>
+                  <img class="rounded-t-lg" src="${pokemonData.sprites.other.home.front_default
                   }" alt="${
                   pokemonData.name
                 }" style="width: 220px; height: 220px;" />
@@ -36,12 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="mb-3 mt-3 font-normal text-[#2B4020] dark:text-white">${getPokemonDescription(
                       pokemonSpeciesData
                     )}</p>
-                    <a href="/src/detail.html?id=${pokemonData.id}" data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    <a href="/src/detail.html?id=${pokemonData.id}" data-modal-target="staticModal" data-modal-toggle="staticModal" class="text-sm font-medium text-center rounded-lg bg-[#5E7C60] text-[#F9F5F2] block font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Read More
                   </a>
                   </div>
                 `;
-
                 container.appendChild(card);
               });
           })
@@ -53,10 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (entry) => entry.language.name === "en"
     ).flavor_text;
     return description;
-  }
-
- 
-  
+  } 
 });
 
 
