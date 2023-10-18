@@ -10,9 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(pokemon.url)
           .then((response) => response.json())
           .then((pokemonData) => {
-            fetch(
-              `https://pokeapi.co/api/v2/pokemon-species/${pokemonData.id}/`
-            )
+            fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonData.id}/`)
               .then((response) => response.json())
               .then((pokemonSpeciesData) => {
                 const card = document.createElement("div");
@@ -21,25 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 card.innerHTML = `
                   <div class="absolute top-3 right-3 text-[#D5D6C6] text-3xl font-bold px-2 py-1">#${pokemonData.id}</div>
-                  <img class="rounded-t-lg" src="${pokemonData.sprites.other.home.front_default
-                  }" alt="${
-                  pokemonData.name
-                }" style="width: 220px; height: 220px;" />
+                  <img class="rounded-t-lg" src="${pokemonData.sprites.other.home.front_default}" alt="${pokemonData.name}" style="width: 220px; height: 220px;" />
                   <div class="px-5 pb-5">
-                    <h5 class="mb-2 mt-2 text-2xl font-bold tracking-tight text-[#2B4020] dark:text-white">${
-                      pokemonData.name
-                    } </h5>
-                    <p class="mb-3 mt-3 font-normal text-[#2B4020] dark:text-white">${getPokemonDescription(
-                      pokemonSpeciesData
-                    )}</p>
-                    <a href="/src/detail.html?id=${pokemonData.id}" data-modal-target="staticModal" data-modal-toggle="staticModal" class="text-sm font-medium text-center rounded-lg bg-[#5E7C60] text-[#F9F5F2] block font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                    Read More
-                  </a>
+                    <h5 class="mb-2 mt-2 text-2xl font-bold tracking-tight text-[#2B4020] dark:text-white">${pokemonData.name}</h5>
+                    <p class="mb-3 mt-3 font-normal text-[#2B4020] dark:text-white">${getPokemonDescription(pokemonSpeciesData)}</p>
+                      <a href="/src/detail.html?id=${pokemonData.id}" class="text-sm font-medium text-center rounded-lg bg-[#5E7C60] text-[#F9F5F2] block font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                      Read More
+                      </a>
                   </div>
                 `;
                 container.appendChild(card);
               });
-          })
+          });
       });
     });
 
@@ -48,7 +39,5 @@ document.addEventListener("DOMContentLoaded", () => {
       (entry) => entry.language.name === "en"
     ).flavor_text;
     return description;
-  } 
+  }
 });
-
-
